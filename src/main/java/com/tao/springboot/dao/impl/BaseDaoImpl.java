@@ -5,10 +5,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.tao.springboot.dao.BaseDao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.hztuen.dao.BaseDao;
 
 @Repository("daoSupport")
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
