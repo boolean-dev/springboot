@@ -21,7 +21,7 @@
 	<!-- 命名空间 -->
 	<typeAliases>
 		<!-- 扫描该包下面所有的类，别名为@Alias注解内容。为空时为类名的首字母小写如：School将表示为school -->
-		<package name="com.hztuen.entity" />
+		<package name="com.tao.springboot.entity" />
 	</typeAliases>
 
 	<!-- 映射类处理 -->

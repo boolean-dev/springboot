@@ -34,7 +34,7 @@
 
 		<!-- 表单 -->
 		<div class="ibox-content">
-			<form id="listForm" action="${base}/findColum.jthml" method="post">
+			<form id="listForm" action="${base}/findColumn" method="post">
 				<div class="row">
 					<div class="col-sm-5 m-b-xs">
 						<!--<a id="findColumButton" class="btn btn-outline btn-primary" onclick="findColum()"><i class="fa fa-trash-o"></i>&nbsp读取数据表</a>-->

@@ -31,6 +31,32 @@ public class CreateCodeController {
 		return "/createCode/add";
 	}
 
+	/*@ResponseBody
+	@RequestMapping("/fun")
+	public Object fun(){
+		return "aaaaaa";
+	}*/
+
+	@RequestMapping(value = "/findColumn", method = RequestMethod.POST)
+	public Object findColumn(ModelMap model, String findTableName) throws Exception {
+		Map<String,Object> parameter = new HashMap<>();
+		parameter.put("tableName", findTableName);
+//		List<CreateItem> createItems = createCodeService.findList("CreateCodeMapper.findColum", parameter);
+		List<CreateItem> createItems = createCodeService.findColum(parameter);
+		List<CreateItem> result = new ArrayList<>();
+		for(int i=0; i<createItems.size();i++) {
+			if("id".equals(createItems.get(i).getJavaName()) || "createDate".equals(createItems.get(i).getJavaName())
+					|| "modifyDate".equals(createItems.get(i).getJavaName()) || "orders".equals(createItems.get(i).getJavaName())) {
+				continue;
+			}else {
+				result.add(createItems.get(i));
+			}
+		}
+		model.addAttribute("createItems", result);
+		return "/createCode/add";
+	}
+
+
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public static Object save(String entityName, String tableName, String memo, String strCreateItems) throws Exception {
@@ -137,24 +163,5 @@ public class CreateCodeController {
 		return null;
 	}
 	
-//	@ResponseBody
-	@RequestMapping(value = "/findColum", method = RequestMethod.POST)
-	public Object findColum(ModelMap model, String findTableName) throws Exception {
-		Map<String,Object> parameter = new HashMap<>();
-		parameter.put("tableName", findTableName);
-//		List<CreateItem> createItems = createCodeService.findList("CreateCodeMapper.findColum", parameter);
-		List<CreateItem> createItems = createCodeService.findColum(parameter);
-		List<CreateItem> result = new ArrayList<>();
-		for(int i=0; i<createItems.size();i++) {
-			if("id".equals(createItems.get(i).getJavaName()) || "createDate".equals(createItems.get(i).getJavaName())
-					|| "modifyDate".equals(createItems.get(i).getJavaName()) || "orders".equals(createItems.get(i).getJavaName())) {
-				continue;
-			}else {
-				result.add(createItems.get(i));
-			}
-		}
-		model.addAttribute("createItems", result);
-		return "/admin/createCode/add";
-	}
-	
+
 }

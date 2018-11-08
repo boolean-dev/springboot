@@ -2,7 +2,7 @@ spring:
   application:
     name: springboot
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/beeslive?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    url: jdbc:mysql://127.0.0.1:3306/beeslive?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-classs-name: com.mysql.jdbc.Driver

@@ -4,11 +4,11 @@
 <mapper namespace="CreateCodeMapper">
 
 	<resultMap id="BaseResultMap" type="com.tao.springboot.entity.CreateItem">
-		<id column="columnName" property="columnName" jdbcType="VARCHAR" />
+		<id column="column_name" property="columnName" jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
 		<result column="memo" property="memo" jdbcType="VARCHAR" />
-		<result column="isNullable" property="is_nullable" jdbcType="BOOLEAN" />
+		<result column="is_nullable" property="isNullable" jdbcType="BOOLEAN" />
 	</resultMap>
 
 	<sql id="columns">

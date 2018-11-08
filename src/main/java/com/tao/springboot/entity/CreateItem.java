@@ -34,12 +34,19 @@ public class CreateItem {
 		this.memo = memo;
 	}
 
+	public boolean getIsNullable() {
+		return isNullable;
+	}
 	public boolean isIsNullable() {
 		return isNullable;
 	}
 
-	public void setIsNullable(boolean isNullable) {
-		this.isNullable = isNullable;
+	public void setIsNullable(String isNullable) {
+		if ("YES".equalsIgnoreCase(isNullable)) {
+			this.isNullable = true;
+		}else if ("NO".equalsIgnoreCase(isNullable)) {
+			this.isNullable = false;
+		}
 	}
 
 	public String getColumnName() {
