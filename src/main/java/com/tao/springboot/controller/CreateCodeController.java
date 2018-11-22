@@ -2,6 +2,7 @@ package com.tao.springboot.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tao.springboot.configuration.CreateCodeConfig;
 import com.tao.springboot.entity.CreateCodeVo;
 import com.tao.springboot.entity.CreateItem;
 import com.tao.springboot.service.CreateCodeService;
@@ -31,16 +32,11 @@ public class CreateCodeController {
 		return "/createCode/add";
 	}
 
-	/*@ResponseBody
-	@RequestMapping("/fun")
-	public Object fun(){
-		return "aaaaaa";
-	}*/
-
-	@RequestMapping(value = "/findColumn", method = RequestMethod.POST)
+	@RequestMapping(value = "/column", method = RequestMethod.POST)
 	public Object findColumn(ModelMap model, String findTableName) throws Exception {
 		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("tableName", findTableName);
+		parameter.put("databaseName", CreateCodeConfig.DATA_BASE_NAME);
 //		List<CreateItem> createItems = createCodeService.findList("CreateCodeMapper.findColum", parameter);
 		List<CreateItem> createItems = createCodeService.findColum(parameter);
 		List<CreateItem> result = new ArrayList<>();

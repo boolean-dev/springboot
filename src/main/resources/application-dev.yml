@@ -7,7 +7,7 @@ spring:
     password: 123456
     driver-classs-name: com.mysql.jdbc.Driver
 server:
-  port: 8080
+  port: 80
 
 
 
