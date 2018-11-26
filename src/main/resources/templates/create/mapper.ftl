@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${objectName}Mapper">
 
-	<resultMap id="BaseResultMap" type="com.hztuen.entity.${objectName}">
+	<resultMap id="BaseResultMap" type="${BASE_PACKAGE}.entity.${objectName}">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<#list params as param>
 		<result column="${param.columnName}" property="${param.name}" jdbcType="${param.mybatisJdbcType}" />

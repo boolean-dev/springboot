@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import static com.tao.springboot.configuration.CreateCodeConfig.*;
 
 @Controller("adminCreateCodeController")
 public class CreateCodeController {
@@ -57,10 +61,6 @@ public class CreateCodeController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public static Object save(String entityName, String tableName, String memo, String strCreateItems) throws Exception {
 		
-		//JsonObject josnObject = new JsonParser().parse(createCodeVo.toString()).getAsJsonObject();
-		//String entityName = josnObject.get("entityName").toString();
-		//String tableName = josnObject.get("tableName").toString();
-		//String strcCreateItems = josnObject.get("createItems").toString();
 		Gson gson = new Gson();
 		List<CreateItem> createItems = gson.fromJson(strCreateItems, new TypeToken<List<CreateItem>>(){}.getType());
 		CreateCodeVo vo = new CreateCodeVo();
@@ -73,58 +73,77 @@ public class CreateCodeController {
 		// 首字母小写
 		String objectNameLower = entityName.substring(0, 1).toLowerCase() + entityName.substring(1);
 
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 		Map<String, Object> root = new HashMap<String, Object>();
 		root.put("memo", memo);
 		root.put("objectName", objectName);
 		root.put("objectNameLower", objectNameLower);
 		root.put("tableName", tableName);
+		root.put("BASE_PACKAGE",BASE_PACKAGE);
+		root.put("DATE", df.format(LocalDateTime.now()));
+		root.put("AUTHOR", AUTHOR);
 
-//		Map<String, String> params = new HashMap<String, String>();
-//		params.put("title", "标题");
-//		params.put("content", "内容");
-//		params.put("member_id", "会员");
-//		params.put("book_id", "图书(一种)");
-//		params.put("order_id", "订单");O
+
 
 		root.put("params", vo.getCreateItems());
 		// 将下划线大写方式命名的字符串转换为驼峰式
 		root.put("camelName", new CamelNameMethod());
 
 		/* 生成实体 */
-		printFile("entityTemp.ftl", root, objectName + ".java", objectName + "\\entity\\");
+		printJavaFile("entityTemp.ftl", root, objectName + ".java", PACKAGE_PATH_ENTITY);
 
 		/* 生成controller */
-		printFile("controllerTemp.ftl", root, objectName + "Controller.java", objectName + "\\controller\\admin\\");
+		printJavaFile("controllerTemp.ftl", root, objectName + "Controller.java", PACKAGE_PATH_CONTROLLER);
 
 		/* 生成service */
-		printFile("serviceTemp.ftl", root, objectName + "Service.java", objectName + "\\service\\");
-		printFile("serviceImplTemp.ftl", root, objectName + "ServiceImpl.java", objectName + "\\service\\impl\\");
+		printJavaFile("serviceTemp.ftl", root, objectName + "Service.java", PACKAGE_PATH_SERVICE);
+		printJavaFile("serviceImplTemp.ftl", root, objectName + "ServiceImpl.java", PACKAGE_PATH_SERVICE_IMPL);
 
 		/* 生成dao */
-		printFile("daoTemp.ftl", root, objectName + "Dao.java", objectName + "\\dao\\");
-		printFile("daoImplTemp.ftl", root, objectName + "DaoImpl.java", objectName + "\\dao\\impl\\");
+		printJavaFile("daoTemp.ftl", root, objectName + "Dao.java", PACKAGE_PATH_DAO);
+		printJavaFile("daoImplTemp.ftl", root, objectName + "DaoImpl.java", PACKAGE_PATH_DAO_IMPL);
 
 		/* 生成mybatis xml */
-		printFile("mapper.ftl", root, objectName + "Mapper.xml", objectName + "\\");
+		printResourceFile("mapper.ftl", root, objectName + "Mapper.xml", "/mybatis/");
 
 		/* 生成SQL脚本 */
-		printFile("sqlTemp.ftl", root, objectName + ".sql", objectName + "\\");
+		printResourceFile("sqlTemp.ftl", root, objectName + ".sql", null);
 
 		/* 生成ftl页面 */
-		printFile("viewTemp.ftl", root, "view.ftl", objectName + "\\"+ objectNameLower +"\\");
-		printFile("addTemp.ftl", root, "add.ftl", objectName + "\\"+ objectNameLower +"\\");
-		printFile("editTemp.ftl", root, "edit.ftl", objectName + "\\"+ objectNameLower +"\\");
-		printFile("listTemp.ftl", root, "list.ftl", objectName + "\\"+ objectNameLower +"\\");
+		printResourceFile("viewTemp.ftl", root, "view.ftl", "/templates/" + objectNameLower + "/");
+		printResourceFile("addTemp.ftl", root, "add.ftl", "/templates/" + objectNameLower + "/");
+		printResourceFile("editTemp.ftl", root, "edit.ftl", "/templates/" + objectNameLower + "/");
+		printResourceFile("listTemp.ftl", root, "list.ftl", "/templates/" + objectNameLower + "/");
 
 //		Map<String,Object> result=new HashMap<>();
 //		result.put("result", "ok");
 		return "{\"result\":\"ok\"}";
 	}
 
-	public static void printFile(String ftlName, Map<String, Object> root, String outFile, String filePath)
+	public static void printJavaFile(String ftlName, Map<String, Object> root, String outFile, String filePath)
 			throws Exception {
 		try {
-			File file = new File("D:\\createCode\\" + filePath + outFile);
+			File file = new File(PROJECT_PATH + JAVA_PATH + filePath + outFile);
+			if (!file.getParentFile().exists()) { // 判断有没有父路径，就是判断文件整个路径是否存在
+				file.getParentFile().mkdirs(); // 不存在就全部创建
+			}
+			Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+			Template template = getTemplate(ftlName);
+			template.process(root, out); // 模版输出
+			out.flush();
+			out.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void printResourceFile(String ftlName, Map<String, Object> root, String outFile, String filePath)
+			throws Exception {
+		try {
+			File file = new File(PROJECT_PATH + RESOURCES_PATH + filePath + outFile);
 			if (!file.getParentFile().exists()) { // 判断有没有父路径，就是判断文件整个路径是否存在
 				file.getParentFile().mkdirs(); // 不存在就全部创建
 			}

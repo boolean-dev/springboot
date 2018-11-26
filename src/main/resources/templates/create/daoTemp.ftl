@@ -1,11 +1,15 @@
 
-package com.hztuen.dao;
+package ${BASE_PACKAGE}.dao;
 
-import com.hztuen.entity.${objectName};
+import ${BASE_PACKAGE}.entity.${objectName};
 
 
 /**
- * Dao - ${memo}
+ * ${objectName}Dao-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
  */
 public interface ${objectName}Dao extends BaseDao<${objectName}> {
 

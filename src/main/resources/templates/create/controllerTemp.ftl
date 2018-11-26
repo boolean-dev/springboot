@@ -1,9 +1,4 @@
-/*
- * 
- * 
- * 
- */
-package com.hztuen.controller.admin;
+package ${BASE_PACKAGE}.controller;
 
 import javax.annotation.Resource;
 
@@ -13,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hztuen.Message;
-import com.hztuen.Pageable;
-import com.hztuen.entity.${objectName};
-import com.hztuen.service.${objectName}Service;
+import ${BASE_PACKAGE}.Message;
+import ${BASE_PACKAGE}.Pageable;
+import ${BASE_PACKAGE}.entity.${objectName};
+import ${BASE_PACKAGE}.service.${objectName}Service;
 
 /**
- * Controller - ${memo}
+ * ${objectName}Controller-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
  */
 @Controller("admin${objectName}Controller")
 @RequestMapping("/admin/${objectNameLower}")

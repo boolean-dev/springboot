@@ -1,9 +1,4 @@
-/*
- * 
- * 
- * 
- */
-package com.hztuen.service.impl;
+package ${BASE_PACKAGE}.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,14 +8,18 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.hztuen.Page;
-import com.hztuen.Pageable;
-import com.hztuen.dao.${objectName}Dao;
-import com.hztuen.entity.${objectName};
-import com.hztuen.service.${objectName}Service;
+import ${BASE_PACKAGE}.Page;
+import ${BASE_PACKAGE}.Pageable;
+import ${BASE_PACKAGE}.dao.${objectName}Dao;
+import ${BASE_PACKAGE}.entity.${objectName};
+import ${BASE_PACKAGE}.service.${objectName}Service;
 
 /**
- * Service - ${memo}
+ * ${objectName}ServiceImpl-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
  */
 @Service("${objectNameLower}ServiceImpl")
 public class ${objectName}ServiceImpl extends BaseServiceImpl<${objectName}> implements ${objectName}Service {

@@ -1,13 +1,20 @@
-package com.hztuen.dao.impl;
+package ${BASE_PACKAGE}.dao.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.hztuen.dao.${objectName}Dao;
-import com.hztuen.entity.${objectName};
+import ${BASE_PACKAGE}.dao.${objectName}Dao;
+import ${BASE_PACKAGE}.entity.${objectName};
 
+/**
+ * ${objectName}DaoImpl-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
+ */
 /**
  * Dao - 管理员
  */

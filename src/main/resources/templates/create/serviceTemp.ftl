@@ -1,16 +1,15 @@
-/*
- * 
- * 
- * 
- */
-package com.hztuen.service;
+package ${BASE_PACKAGE}.service;
 
-import com.hztuen.Page;
-import com.hztuen.Pageable;
-import com.hztuen.entity.${objectName};
+import ${BASE_PACKAGE}.Page;
+import ${BASE_PACKAGE}.Pageable;
+import ${BASE_PACKAGE}.entity.${objectName};
 
 /**
- * Service - ${memo}
+ * ${objectName}Service-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
  */
 public interface ${objectName}Service extends BaseService<${objectName}> {
 	

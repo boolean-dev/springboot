@@ -1,8 +1,16 @@
-package com.hztuen.entity;
+package ${BASE_PACKAGE}.entity;
 
 import org.apache.ibatis.type.Alias;
 import java.math.BigDecimal;
+import java.util.Date;
 
+/**
+ * ${objectName}-${memo}
+ * @version: v1.0
+ * @Description: @TODO
+ * @author: ${AUTHOR}
+ * @date: ${DATE}
+ */
 @Alias("${objectName}")
 public class ${objectName} extends BaseEntity {
 
