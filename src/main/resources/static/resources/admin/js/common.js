@@ -327,8 +327,8 @@ function message(code) {
 				type: "image",
 				title: message("admin.browser.title"),
 				isUpload: true,
-				browserUrl: shopxx.base + "/admin/file/browser.jhtml",
-				uploadUrl: shopxx.base + "/admin/file/upload.jhtml",
+				browserUrl: shopxx.base + "/admin/file/browser",
+				uploadUrl: shopxx.base + "/admin/file/upload",
 				callback: null
 			};
 			$.extend(settings, options);

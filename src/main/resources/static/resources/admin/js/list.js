@@ -43,7 +43,7 @@ $().ready( function() {
 			btn: [message("admin.dialog.ok"),message("admin.dialog.cancel")],
 		}, function(){
 			$.ajax({
-				url: "delete.jhtml",
+				url: "delete",
 				type: "POST",
 				data: $checkedIds.serialize(),
 				dataType: "json",

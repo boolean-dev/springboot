@@ -16,7 +16,7 @@ import ${BASE_PACKAGE}.service.${objectName}Service;
 /**
  * ${objectName}Controller-${memo}
  * @version: v1.0
- * @Description: @TODO
+ * @Description: ${memo}
  * @author: ${AUTHOR}
  * @date: ${DATE}
  */
@@ -35,7 +35,7 @@ public class ${objectName}Controller extends BaseController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Object save(ModelMap model,${objectName} ${objectNameLower}) throws Exception {
 		${objectNameLower}Service.save(${objectNameLower});
-		return "redirect:list.jhtml";
+		return "redirect:list";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -48,7 +48,7 @@ public class ${objectName}Controller extends BaseController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(ModelMap model,${objectName} ${objectNameLower}) throws Exception {
 		${objectNameLower}Service.update(${objectNameLower});
-		return "redirect:list.jhtml";
+		return "redirect:list";
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

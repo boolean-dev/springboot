@@ -29,7 +29,7 @@ $().ready(function() {
 			<div class="ibox-title">
 				<ol class="breadcrumb">
 	                <li>
-	                    <a href="${'$'}{base}/admin/common/index.jhtml">首页</a>
+	                    <a href="${'$'}{base}/admin/common/index">首页</a>
 	                </li>
 	                <li class="active">查看${memo}</li>
 	            </ol>
@@ -74,7 +74,7 @@ $().ready(function() {
 					<div class="form-group actions">
 						<label class="col-sm-1 control-label"></label>
 						<div class="col-sm-11">
-							<a class="btn btn-white" href="${'$'}{base}/admin/${objectNameLower}/list.jhtml">返&nbsp;&nbsp;回</a>	
+							<a class="btn btn-white" href="${'$'}{base}/admin/${objectNameLower}/list">返&nbsp;&nbsp;回</a>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>

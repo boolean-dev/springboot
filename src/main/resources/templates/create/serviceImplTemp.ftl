@@ -17,7 +17,7 @@ import ${BASE_PACKAGE}.service.${objectName}Service;
 /**
  * ${objectName}ServiceImpl-${memo}
  * @version: v1.0
- * @Description: @TODO
+ * @Description: ${memo}
  * @author: ${AUTHOR}
  * @date: ${DATE}
  */

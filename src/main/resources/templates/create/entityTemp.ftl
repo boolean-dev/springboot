@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * ${objectName}-${memo}
  * @version: v1.0
- * @Description: @TODO
+ * @Description: ${memo}
  * @author: ${AUTHOR}
  * @date: ${DATE}
  */

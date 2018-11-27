@@ -7,7 +7,7 @@ import ${BASE_PACKAGE}.entity.${objectName};
 /**
  * ${objectName}Service-${memo}
  * @version: v1.0
- * @Description: @TODO
+ * @Description: ${memo}
  * @author: ${AUTHOR}
  * @date: ${DATE}
  */

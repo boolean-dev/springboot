@@ -53,14 +53,14 @@ $().ready(function() {
 			<div class="ibox-title">
 				<ol class="breadcrumb">
 	                <li>
-	                    <a href="${'$'}{base}/admin/common/index.jhtml">首页</a>
+	                    <a href="${'$'}{base}/admin/common/index">首页</a>
 	                </li>
 	                <li class="active">添加${memo}</li>
 	            </ol>
 			</div>
 			
 			<div class="ibox-content">
-				<form id="inputForm" action="${'$'}{base}/admin/${objectNameLower}/save.jhtml" method="post" class="form-horizontal">
+				<form id="inputForm" action="${'$'}{base}/admin/${objectNameLower}/save" method="post" class="form-horizontal">
 					
 					<#list params as param>
 					<#if param_index%2 == 0>
@@ -91,7 +91,7 @@ $().ready(function() {
 						<label class="col-sm-1 control-label"></label>
 						<div class="col-sm-11">
 							<input type="submit" class="btn btn-primary" value="确&nbsp;&nbsp;定" />
-							<a class="btn btn-white" href="${'$'}{base}/admin/${objectNameLower}/list.jhtml">返&nbsp;&nbsp;回</a>	
+							<a class="btn btn-white" href="${'$'}{base}/admin/${objectNameLower}/list">返&nbsp;&nbsp;回</a>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>

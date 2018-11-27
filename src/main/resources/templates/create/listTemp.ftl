@@ -28,7 +28,7 @@
 		<div class="ibox-title">
 			<ol class="breadcrumb">
 				<li>
-                    <a href="${'$'}{base}/admin/common/index.jhtml">首页</a>
+                    <a href="${'$'}{base}/admin/common/index">首页</a>
                 </li>
                 <li class="active">${memo}列表<span>(共<span id="pageTotal">${'$'}{page.total}</span>条记录)</span></li>
             </ol>
@@ -36,10 +36,10 @@
 		
 		<!-- 表单 -->
 		<div class="ibox-content">
-			<form id="listForm" action="list.jhtml" method="get">
+			<form id="listForm" action="list" method="get">
 				<div class="row">
 					<div class="col-sm-5 m-b-xs">
-						<a href="add.jhtml" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i>&nbsp;添加</a>
+						<a href="add" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						<a id="deleteButton" class="btn btn-outline btn-danger disabled" ><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 						<a id="refreshButton" class="btn btn-outline btn-warning" ><i class="fa fa-refresh"></i>&nbsp;刷新</a>
 						<div class="btn-group">
@@ -107,10 +107,10 @@
    							</#list>
    							
 				 			<td>
-					 			<a href="${'$'}{base}/admin/${objectNameLower}/view.jhtml?id=${'$'}{${objectNameLower}.id}" class="btn btn-sm btn-white btn-bitbucket">
+					 			<a href="${'$'}{base}/admin/${objectNameLower}/view?id=${'$'}{${objectNameLower}.id}" class="btn btn-sm btn-white btn-bitbucket">
 									<i class="fa fa-eye"></i> 查看
 								</a>
-								<a href="${'$'}{base}/admin/${objectNameLower}/edit.jhtml?id=${'$'}{${objectNameLower}.id}" class="btn btn-sm btn-white btn-bitbucket">
+								<a href="${'$'}{base}/admin/${objectNameLower}/edit?id=${'$'}{${objectNameLower}.id}" class="btn btn-sm btn-white btn-bitbucket">
 									<i class="fa fa-edit"></i> 编辑
 								</a>
 							</td>

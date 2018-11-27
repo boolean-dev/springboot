@@ -41,7 +41,6 @@ public class CreateCodeController {
 		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("tableName", findTableName);
 		parameter.put("databaseName", CreateCodeConfig.DATA_BASE_NAME);
-//		List<CreateItem> createItems = createCodeService.findList("CreateCodeMapper.findColum", parameter);
 		List<CreateItem> createItems = createCodeService.findColum(parameter);
 		List<CreateItem> result = new ArrayList<>();
 		for(int i=0; i<createItems.size();i++) {
@@ -108,13 +107,13 @@ public class CreateCodeController {
 		printResourceFile("mapper.ftl", root, objectName + "Mapper.xml", "/mybatis/");
 
 		/* 生成SQL脚本 */
-		printResourceFile("sqlTemp.ftl", root, objectName + ".sql", null);
+		printResourceFile("sqlTemp.ftl", root, objectName + ".sql", "/");
 
 		/* 生成ftl页面 */
-		printResourceFile("viewTemp.ftl", root, "view.ftl", "/templates/" + objectNameLower + "/");
-		printResourceFile("addTemp.ftl", root, "add.ftl", "/templates/" + objectNameLower + "/");
-		printResourceFile("editTemp.ftl", root, "edit.ftl", "/templates/" + objectNameLower + "/");
-		printResourceFile("listTemp.ftl", root, "list.ftl", "/templates/" + objectNameLower + "/");
+		printResourceFile("viewTemp.ftl", root, "view.ftl", "/templates/admin/" + objectNameLower + "/");
+		printResourceFile("addTemp.ftl", root, "add.ftl", "/templates/admin/" + objectNameLower + "/");
+		printResourceFile("editTemp.ftl", root, "edit.ftl", "/templates/admin/" + objectNameLower + "/");
+		printResourceFile("listTemp.ftl", root, "list.ftl", "/templates/admin/" + objectNameLower + "/");
 
 //		Map<String,Object> result=new HashMap<>();
 //		result.put("result", "ok");
