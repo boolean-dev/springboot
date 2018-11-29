@@ -34,6 +34,7 @@ public class ${objectName}Controller extends BaseController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Object save(ModelMap model,${objectName} ${objectNameLower}) throws Exception {
+		${objectNameLower}.buildId(true);
 		${objectNameLower}Service.save(${objectNameLower});
 		return "redirect:list";
 	}

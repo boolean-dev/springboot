@@ -8,7 +8,7 @@ package com.tao.springboot.configuration;
 public final class CreateCodeConfig {
 
     //数据库名
-    public static final String DATA_BASE_NAME = "beeslive";
+    public static final String DATA_BASE_NAME = "test";
 
     public static final String AUTHOR = "yanjiantao";
 

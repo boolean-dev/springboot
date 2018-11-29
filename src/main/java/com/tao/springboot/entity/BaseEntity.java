@@ -5,25 +5,27 @@ import java.util.Date;
 
 public abstract class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
+
+	protected static GlobalId globalId = new GlobalId(0L, 0L);
 	
 	/** ID */
-	private Long id;
+	protected String id;
 
 	/** 创建日期 */
-	private Date createDate;
+	protected Date createDate;
 
 	/** 修改日期 */
-	private Date modifyDate;
+	protected Date modifyDate;
 
 	/** 排序索引 */
-	private Long orders;
+	protected Long orders;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

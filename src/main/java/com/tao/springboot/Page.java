@@ -79,7 +79,7 @@ public class Page<T> implements Serializable {
 	 * @return 搜索属性
 	 */
 	public String getSearchProperty() {
-		return pageable.getSearchProperty();
+		return pageable.getSearchProperty() == null ? "" : pageable.getSearchProperty();
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class Page<T> implements Serializable {
 	 * @return 搜索值
 	 */
 	public String getSearchValue() {
-		return pageable.getSearchValue();
+		return pageable.getSearchValue() == null ? "" : pageable.getSearchValue();
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Page<T> implements Serializable {
 	 * @return 排序属性
 	 */
 	public String getOrderProperty() {
-		return pageable.getOrderProperty();
+		return pageable.getOrderProperty() == null ? "" : pageable.getOrderProperty();
 	}
 
 	/**

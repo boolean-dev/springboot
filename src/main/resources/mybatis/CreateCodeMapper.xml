@@ -28,7 +28,7 @@
 		is_nullable isNullable,
 		column_comment memo
 		FROM Information_schema.columns
-		WHERE table_schema = 'beeslive' and table_Name = #{tableName}
+		WHERE table_schema = 'test' and table_Name = #{tableName}
 	</select>
 
 </mapper>
