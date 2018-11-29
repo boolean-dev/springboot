@@ -34,13 +34,13 @@ public class ${objectName}Controller extends BaseController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Object save(ModelMap model,${objectName} ${objectNameLower}) throws Exception {
-		${objectNameLower}.buildId(true);
+		${objectNameLower}.buildId();
 		${objectNameLower}Service.save(${objectNameLower});
 		return "redirect:list";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(ModelMap model,Long id) throws Exception {
+	public String edit(ModelMap model,String id) throws Exception {
 		${objectName} ${objectNameLower} = ${objectNameLower}Service.findById(id);
 		model.addAttribute("${objectNameLower}", ${objectNameLower});
 		return "/admin/${objectNameLower}/edit";
@@ -59,7 +59,7 @@ public class ${objectName}Controller extends BaseController {
 	}
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view(ModelMap model,Long id) throws Exception {
+	public String view(ModelMap model,String id) throws Exception {
 		${objectName} ${objectNameLower} = ${objectNameLower}Service.findById(id);
 		model.addAttribute("${objectNameLower}", ${objectNameLower});
 		return "/admin/${objectNameLower}/view";
@@ -67,7 +67,7 @@ public class ${objectName}Controller extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Message delete(Long[] ids) throws Exception {
+	public Message delete(String[] ids) throws Exception {
 		int i = ${objectNameLower}Service.delete(ids);
 		if(i > 0){
 			return SUCCESS_MESSAGE;

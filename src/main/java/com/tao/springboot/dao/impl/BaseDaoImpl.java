@@ -38,11 +38,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		return entity;
 	}
 	
-	public int delete(String mapper, Long id) throws Exception {
+	public int delete(String mapper, String id) throws Exception {
 		return sqlSessionTemplate.delete(mapper, id);
 	}
 
-	public int delete(String str, Long[] ids) throws Exception {
+	public int delete(String str, String[] ids) throws Exception {
 		return sqlSessionTemplate.delete(str, ids);
 	}
 	

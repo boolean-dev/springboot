@@ -21,4 +21,8 @@ public class ${objectName} extends BaseEntity {
 	private ${param.type} ${param.name};
 	
 	</#list>
+
+    public void buildId() {
+        this.id = "CR" + globalId.nextId();
+    }
 }

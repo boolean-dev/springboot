@@ -17,7 +17,7 @@ public class CreateCodeServiceImpl extends BaseServiceImpl<CreateItem> implement
 	private CreateCodeDao createCodeDao;
 	
 	@Override
-	public int delete(Long[] ids) throws Exception {
+	public int delete(String[] ids) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

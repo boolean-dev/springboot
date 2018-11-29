@@ -26,7 +26,7 @@ public class ${objectName}DaoImpl extends BaseDaoImpl<${objectName}> implements 
 		return super.find(mapper, parameters);
 	}
 
-	public ${objectName} find(Long id) throws Exception {
+	public ${objectName} find(String id) throws Exception {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("id", id);
 		return super.find("${objectName}Mapper.findById", parameters);

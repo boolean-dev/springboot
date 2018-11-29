@@ -34,7 +34,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	}
 	
 	@Transactional
-	public int delete(String mapper, Long id) throws Exception {
+	public int delete(String mapper, String id) throws Exception {
 		return baseDao.delete(mapper, id);
 	}
 
@@ -49,7 +49,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	}
 
 	@Transactional
-	public int delete(String mapper, Long[] ids) throws Exception {
+	public int delete(String mapper, String[] ids) throws Exception {
 		return baseDao.delete(mapper, ids);
 	}
 

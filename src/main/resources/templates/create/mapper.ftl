@@ -4,7 +4,7 @@
 <mapper namespace="${objectName}Mapper">
 
 	<resultMap id="BaseResultMap" type="${BASE_PACKAGE}.entity.${objectName}">
-		<id column="id" property="id" jdbcType="BIGINT" />
+		<id column="id" property="id" jdbcType="VARCHAR" />
 		<#list params as param>
 		<result column="${param.columnName}" property="${param.name}" jdbcType="${param.mybatisJdbcType}" />
 		</#list>
@@ -45,7 +45,7 @@
 	  (<include refid="columns"/>)
 	  VALUES 
 	  (
-	  	NULL,
+		${'#'}{id},
 		<#list params as param>
 		${'#'}{${param.name}},
 		</#list>
@@ -56,7 +56,7 @@
 	</insert>
  
 	<!-- 根据id查找 -->
-	<select id="findById" parameterType="Long" resultMap="BaseResultMap">
+	<select id="findById" parameterType="String" resultMap="BaseResultMap">
 		SELECT	
 		<include refid="columns"/>
 		FROM ${tableName} t

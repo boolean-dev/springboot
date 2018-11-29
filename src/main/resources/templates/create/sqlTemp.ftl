@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `${tableName}` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` VARCHAR(20) NOT NULL AUTO_INCREMENT,
    <#list params as param>
    `${param.columnName}` ${param.columnType} <#if param.isNullable == true > DEFAULT NULL <#else> NOT NULL </#if> COMMENT '${param.memo}',
    </#list>

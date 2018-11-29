@@ -16,9 +16,9 @@ public interface BaseService<T> {
 
 	public int update(String mapper, Map<String, Object> parameter) throws Exception;
 
-	public int delete(String mapper, Long id) throws Exception;
+	public int delete(String mapper, String id) throws Exception;
 
-	public int delete(Long[] ids) throws Exception;
+	public int delete(String[] ids) throws Exception;
 
 	public int delete(String mapper, Map<String, Object> parameter) throws Exception;
 

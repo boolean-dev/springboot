@@ -40,11 +40,11 @@ public class ${objectName}ServiceImpl extends BaseServiceImpl<${objectName}> imp
 		return ${objectNameLower}Dao.update("${objectName}Mapper.update", ${objectNameLower});
 	}
 	
-	public int delete(Long[] ids) throws Exception {
+	public int delete(String[] ids) throws Exception {
 		return ${objectNameLower}Dao.delete("${objectName}Mapper.deleteAll", ids);
 	}
 
-	public ${objectName} findById(Long id) throws Exception {
+	public ${objectName} findById(String id) throws Exception {
 		return ${objectNameLower}Dao.find(id);
 	}
 

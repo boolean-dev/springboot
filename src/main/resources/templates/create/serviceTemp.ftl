@@ -13,7 +13,7 @@ import ${BASE_PACKAGE}.entity.${objectName};
  */
 public interface ${objectName}Service extends BaseService<${objectName}> {
 	
-	${objectName} findById(Long id) throws Exception;
+	${objectName} findById(String id) throws Exception;
 
 	Page<${objectName}> findPage(Pageable pageable) throws Exception;
 	

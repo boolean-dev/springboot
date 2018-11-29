@@ -20,6 +20,6 @@ public interface ${objectName}Dao extends BaseDao<${objectName}> {
 	 * @return 若不存在则返回null
 	 * @throws Exception 
 	 */
-	${objectName} find(Long id) throws Exception;
+	${objectName} find(String id) throws Exception;
 
 }
