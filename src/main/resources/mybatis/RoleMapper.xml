@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RoleMapper">
+	<resultMap id="BaseResultMap" type="com.tao.springboot.entity.Role">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="is_system" property="isSystem" jdbcType="BIT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<collection property="authorities" column="id" select="findAuthorities"></collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, create_date, modify_date, description, is_system, name
+	</sql>
+
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tb_role
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="findRoles" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		b.id,b.create_date,b.modify_date,b.description,b.is_system,b.name
+		from
+		tb_admin_role a,tb_role b
+		where
+		a.roles = b.id and a.admins = #{id}
+	</select>
+
+	<select id="findAuthorities" resultType="java.lang.String" parameterType="java.lang.String">
+		select authorities
+		from tb_role_authority
+		where role = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="findPage" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM tb_role t
+		WHERE 1 = 1
+		
+		<if test="name != null and name != ''">
+			and t.name like CONCAT(CONCAT('%', #{name}),'%')
+		</if>
+		<if test="create_date != null and create_date != ''">
+			and t.create_date like CONCAT(CONCAT('%', #{createDate}),'%')
+		</if>
+		
+		ORDER BY id DESC
+		LIMIT
+		#{startIndex},#{pageSize}
+	</select>
+
+	<select id="findAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM tb_role t
+		where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+	</select>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_role (id, create_date, modify_date,
+		description, is_system, name
+		)
+		values (#{id,jdbcType=BIGINT}, now(), now(),
+		#{description,jdbcType=VARCHAR}, #{isSystem,jdbcType=BIT},
+		#{name,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="saveAuthorities">
+		insert into tb_role_authority (role,authorities)
+		values
+		<foreach item="item" index="index" collection="list"
+			separator=",">
+			(#{item.role},#{item.authorities})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteRoles">
+		DELETE FROM tb_admin_role
+		WHERE
+		roles in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="deleteAuthorities">
+		delete from tb_role_authority
+		WHERE
+		role in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="Role">
+		update tb_role
+		set
+		modify_date = now(),
+		description = #{description,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 批量删除 -->
+	<delete id="deleteAll">
+		DELETE FROM tb_role
+		WHERE
+		id in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="count" resultType="java.lang.Long">
+		select count(*) from tb_role
+		WHERE 1 = 1
+		
+		<if test="name != null and name != ''">
+			and t.name like CONCAT(CONCAT('%', #{name}),'%')
+		</if>
+		<if test="create_date != null and create_date != ''">
+			and t.create_date like CONCAT(CONCAT('%', #{createDate}),'%')
+		</if>
+		
+		ORDER BY id DESC
+		LIMIT
+		#{startIndex},#{pageSize}
+	</select>
+</mapper>
