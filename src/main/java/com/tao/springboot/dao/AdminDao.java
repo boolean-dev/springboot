@@ -22,4 +22,11 @@ public interface AdminDao extends BaseDao<Admin> {
 	 */
 	Admin find(String id) throws Exception;
 
+	/**
+	 * 通过用户名查找admin
+	 * @param userName the user name
+	 * @return	the admin
+	 */
+	Admin findByUserName(String userName) throws Exception;
+
 }

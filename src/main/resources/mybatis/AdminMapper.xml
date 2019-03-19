@@ -5,97 +5,161 @@
 
 	<resultMap id="BaseResultMap" type="com.tao.springboot.entity.Admin">
 		<id column="id" property="id" jdbcType="VARCHAR" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
-		<result column="date" property="date" jdbcType="TIMESTAMP" />
-		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="department" property="department" jdbcType="VARCHAR" />
+		<result column="loginFailureCount" property="loginFailureCount" jdbcType="INTEGER" />
+		<result column="isLocked" property="isLocked" jdbcType="BIT" />
+		<result column="lockedDate" property="lockedDate" jdbcType="TIMESTAMP" />
+		<result column="loginDate" property="loginDate" jdbcType="TIMESTAMP" />
+		<result column="loginIp" property="loginIp" jdbcType="VARCHAR" />
+		<result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+		<result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="modifyDate" property="modifyDate" jdbcType="TIMESTAMP" />
 		<result column="orders" property="orders" jdbcType="BIGINT" />
 	</resultMap>
 
 	<sql id="columns">
 		id,
-		name,
 		username,
 		password,
-		date,
-		create_date,
-		modify_date,
+		email,
+		name,
+		department,
+		loginFailureCount,
+		isLocked,
+		lockedDate,
+		loginDate,
+		loginIp,
+		head_img_url,
+		createDate,
+		modifyDate,
 		orders
 	</sql>
-	
+
 	<!-- 查找分页 -->
-	<select id="findPage" parameterType="map" resultMap="BaseResultMap">
+	<select id="findPage" parameterType="map" resultType="Admin">
 		SELECT
-		<include refid="columns"/>
-		FROM tb_admin t
+		<include refid="columns" />
+		FROM TB_ADMIN t
+		WHERE 1 = 1
+		<if test="username != null and username != ''">
+			and t.username like CONCAT('%', #{username},'%')
+		</if>
+		<if test="name != null and name != ''">
+			and t.name like CONCAT('%', #{name},'%')
+		</if>
+		<if test="department != null and department != ''">
+			and t.department like CONCAT('%', #{department},'%')
+		</if>
 		ORDER BY id DESC
 		LIMIT #{startIndex},#{pageSize}
 	</select>
-	
-	<!-- 查找列表 -->
-	<select id="findList" parameterType="map" resultMap="BaseResultMap">
-		SELECT
-		<include refid="columns"/>
-		FROM tb_admin t
-	</select>
-	
+
 	<!-- 保存 -->
-	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="Admin">
-	  INSERT INTO tb_admin
-	  (<include refid="columns"/>)
-	  VALUES 
-	  (
-		#{id},
-		#{name},
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tb_admin
+		(
+		<include refid="columns" />
+		)
+		VALUES
+		(
+		null,
 		#{username},
 		#{password},
-		#{date},
-		now(),
-		now(),
+		#{email},
+		#{name},
+		#{department},
+		#{loginFailureCount},
+		#{isLocked},
+		#{lockedDate},
+		#{loginDate},
+		#{loginIp},
+		#{headImgUrl},
+		#{createDate},
+		#{modifyDate},
 		#{orders}
-	  )
+		)
 	</insert>
- 
+
 	<!-- 根据id查找 -->
 	<select id="findById" parameterType="String" resultMap="BaseResultMap">
-		SELECT	
-		<include refid="columns"/>
-		FROM tb_admin t
+		SELECT
+		<include refid="columns" />
+		FROM TB_ADMIN t
 		WHERE t.id = #{id}
 	</select>
-	
-	<!-- 修改 -->
-	<update id="update" parameterType="Admin">
-		UPDATE tb_admin
-		<trim prefix="set" suffixOverrides=","> 
-			<if test="name != null">name = #{name},</if>
-			<if test="username != null">username = #{username},</if>
-			<if test="password != null">password = #{password},</if>
-			<if test="date != null">date = #{date},</if>
-			<if test="createDate != null">create_date = #{createDate},</if>
-			modify_date = now(),
-			<if test="orders != null">orders = #{orders}</if>
-		</trim>
-		WHERE 
-			id = #{id}
-	</update>
-	
+
+	<!-- 根据用户名username查找 -->
+	<select id="findByUserName" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		<include refid="columns" />
+		FROM TB_ADMIN t
+		WHERE t.username = #{userName}
+	</select>
+
+	<insert id="saveRoles">
+		insert into tb_admin_role (admins,roles)
+		values
+		<foreach item="item" index="index" collection="list"
+			separator=",">
+			(#{item.admins},#{item.roles})
+		</foreach>
+	</insert>
+
+	<delete id="deleteRoles" parameterType="java.lang.String">
+		DELETE FROM tb_admin_role
+		WHERE admins = #{id}
+	</delete>
+
 	<!-- 批量删除 -->
-	<delete id="deleteAll">
-		DELETE FROM tb_admin
-		WHERE id IN
-		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-        	#{item}
+	<delete id="deleteRolesByAdmin">
+		DELETE FROM tb_admin_role
+		WHERE
+		admins in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
 		</foreach>
 	</delete>
-	
-	<!-- 统计 -->
-	<select id="count" parameterType="map" resultType="java.lang.Long">
-		SELECT
-		COUNT(*)
-		FROM tb_admin t
+
+	<!-- 修改 -->
+	<update id="update" parameterType="Admin">
+		UPDATE TB_ADMIN SET
+		<if test="password != null and password != ''">
+			password = #{password},
+		</if>
+		email = #{email},
+		name = #{name},
+		department = #{department},
+		loginFailureCount = #{loginFailureCount},
+		isLocked = #{isLocked},
+		lockedDate = #{lockedDate},
+		loginDate = #{loginDate},
+		loginIp = #{loginIp},
+		head_img_url = #{headImgUrl},
+		createDate = #{createDate},
+		modifyDate = #{modifyDate},
+		orders = #{orders}
+		WHERE
+		id = #{id}
+	</update>
+
+	<!-- 批量删除 -->
+	<delete id="deleteAll">
+		DELETE FROM TB_ADMIN
+		WHERE
+		id IN
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="count" resultType="java.lang.Long">
+		SELECT COUNT(*) FROM TB_ADMIN
 	</select>
-	
+
 </mapper>

@@ -1,8 +1,11 @@
 package com.tao.springboot.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 public abstract class BaseEntity implements Serializable {
 
 	protected static final long serialVersionUID = 1L;
@@ -21,35 +24,4 @@ public abstract class BaseEntity implements Serializable {
 	/** 排序索引 */
 	protected Long orders;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-
-	public Long getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Long orders) {
-		this.orders = orders;
-	}
 }

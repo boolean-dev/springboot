@@ -37,12 +37,12 @@
 		<div>
 			<div>
 			<h1 class="logo-name">
-					<img src="${base}/resources/admin/img/waimai.png" width="75" height="75"/>
+					<img src="${base}/resources/admin/img/yaqi_icon.png" width="216" height="153"/>
 				</h1>
 			</div>
 			
 			<br/>
-			<h3>欢迎使用外卖点餐系统</h3>
+			<h3>欢迎使用亚汽专车后台管理系统</h3>
 
 			<form class="m-t" role="form" method="get" action="#">
 				<div class="form-group">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>spring-boot脚手架</title>
+    <title>hztuen - 后台管理系统</title>
 
     <meta name="keywords" content="Flashbike,flashbike,Flash bike,flash bike,闪骑">
   
@@ -36,62 +36,170 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="${base}/resources/admin/img/a1.jpg" width="75" height="75"/></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">用户名</strong></span>
-                                <span class="text-muted text-xs block">姓名<b class="caret"></b></span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                </li>
-                                <li><a class="J_menuItem" href="${base}/admin/profile/edit">个人资料</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="logout">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">Flash
-                        </div>
+						<div class="dropdown profile-element">
+							<span><img alt="image" class="img-circle" src="[#if admin.headImgUrl??]${admin.headImgUrl}[#else]${base}/resources/admin/img/profile_small.jpg[/#if]" width="64px" height="64px" /></span>
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<span class="clear">
+							   <span class="block m-t-xs"><strong class="font-bold">${admin.username}</strong></span>
+								<span class="text-muted text-xs block">${admin.name}<b class="caret"></b></span>
+								</span>
+							</a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a class="J_menuItem" href="${base}/admin/profile/edit.jhtml">个人资料</a>
+								</li>
+								<li class="divider"></li>
+								<li><a href="logout.jhtml">安全退出</a>
+								</li>
+							</ul>
+						</div>
+						<div class="logo-element">Flash
+						</div>
+					</li>
+                    <li class="loading">
+                        <a href="#">
+                            <i class="fa fa-car"></i>
+                            <span class="nav-label">车辆管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        		<li><a class="J_menuItem" href="${base}/admin/car/list.jhtml">车辆管理</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/car/monitor.jhtml">车辆监控</a></li>
+                        </ul>
                     </li>
                     <li class="loading">
                         <a href="#">
                             <i class="fa fa-file"></i>
-                            <span class="nav-label">一级菜单</span>
+                            <span class="nav-label">订单管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                        		<li><a class="J_menuItem" href="#">二级菜单</a></li>
-                            <li><a class="J_menuItem" href="#">二级菜单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/list.jhtml">所有订单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/finished/list.jhtml">已完成订单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/appointment/list.jhtml">预约中订单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/ongoing/list.jhtml">进行中订单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/error/list.jhtml">异常订单</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/order/cancel/list.jhtml">取消订单</a></li>
                         </ul>
-
+                    </li>
+                    <li class="loading">
+						<a href="#">
+                            <i class="fa fa-user"></i>
+                            <span class="nav-label">司机管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        		<li><a class="J_menuItem" href="${base}/admin/driver/list.jhtml">司机信息</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/driverComment/list.jhtml">司机评分</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/encashment/list.jhtml">提现记录</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/driverBill/list.jhtml">流水记录</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/encashment/settlement.jhtml">司机结算</a></li>
+                        		<li><a class="J_menuItem" href="${base}/admin/driverMode/list.jhtml">接单模式</a></li>
+                        </ul>
+                    </li>
+                    <li class="loading">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-label">用户管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        	[@hasPermission name="admin:member"]
+                            <li><a class="J_menuItem" href="${base}/admin/member/list.jhtml">用户信息</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/memberComment/list.jhtml">用户评分</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/memberBill/rechargeList.jhtml">充值记录</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/memberBill/list.jhtml">流水记录</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/nameAuthentication/list.jhtml">实名认证</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/invoice/list.jhtml">发票管理</a></li>
+                            [/@hasPermission]
+                        </ul>
+                    </li>
+                    <li class="loading">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-child"></i>
+                            <span class="nav-label">合作伙伴</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        	<li><a class="J_menuItem" href="${base}/admin/partner/list.jhtml">合作伙伴信息</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/partnerIncome/list.jhtml">报表查询</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/partnerEncashment/list.jhtml">合伙人结算</a></li>
+                        </ul>
                     </li>
                     <li class="loading">
                         <a href="#">
-                            <i class="glyphicon glyphicon-th-large"></i>
-                            <span class="nav-label">一级菜单</span>
+                            <i class="fa fa-rocket"></i>
+                            <span class="nav-label">运营管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="#">二级菜单</a></li>
-                            <li><a class="J_menuItem" href="#">二级菜单</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/rechargeAllocation/list.jhtml">充值策略</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/payment/list.jhtml">付款单管理</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/coupon/list.jhtml">打车券管理</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/chargeRule/editByType.jhtml?type=member">用户计费规则</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/chargeRule/editByType.jhtml?type=driver">司机计费规则</a></li>
                         </ul>
                     </li>
-
                     <li class="loading">
-
-                        <a href="#">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span class="nav-label">生成代码</span>
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-bar-chart"></i>
+                            <span class="nav-label">数据统计</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="${base}/admin/admin/list" data-index="0">管理员</a></li>
-                            <li><a class="J_menuItem" href="${base}/create">基础代码生成</a></li>
+                        	<li><a class="J_menuItem" href="javascript:void(0)">用户统计</a></li>
+                        	<li><a class="J_menuItem" href="javascript:void(0)">订单统计</a></li>
+                        	<li><a class="J_menuItem" href="javascript:void(0)">退款统计</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/payment/platformIncome.jhtml">收入统计</a></li>
                         </ul>
                     </li>
+                    <li class="loading">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-gear"></i>
+                            <span class="nav-label">后台管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        	[@hasPermission name="admin:admin"]
+                            <li><a class="J_menuItem" href="${base}/admin/admin/list.jhtml" data-index="0">管理员</a></li>
+                            [/@hasPermission]
+                            [@hasPermission name="admin:role"]
+                            <li><a class="J_menuItem" href="${base}/admin/role/list.jhtml">角色管理</a></li>
+                            [/@hasPermission]
+                            [@hasPermission name="admin:articleCategory"]
+                            <li><a class="J_menuItem" href="${base}/admin/articleCategory/list.jhtml">帮助分类</a></li>
+                            [/@hasPermission]
+                            [@hasPermission name="admin:article"]
+                            <li><a class="J_menuItem" href="${base}/admin/article/list.jhtml">帮助管理</a></li>
+                            [/@hasPermission]
+                            <li><a class="J_menuItem" href="${base}/admin/dictionary/list.jhtml">数据字典</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/orderComment/list.jhtml">评价列表</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/driverAuthentication/list.jhtml">行驶认证</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/feedBack/list.jhtml">意见反馈</a></li>
+                        </ul>
+                    </li>
+                    <li class="loading">
+                        <a href="#">
+                            <i class="fa fa-comment"></i>
+                            <span class="nav-label">推送管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        	<li><a class="J_menuItem" href="${base}/admin/messageDriver/list.jhtml">司机端推送</a></li>
+                            <li><a class="J_menuItem" href="${base}/admin/messageMember/list.jhtml">用户端推送</a></li>
+                        </ul>
+                    </li>							
+                    <li class="loading">
+                        <a href="#">
+                            <i class="fa fa-comment"></i>
+                            <span class="nav-label">接口测试</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                        	<li><a class="J_menuItem" href="${base}/admin/apiTest/orderList.jhtml">订单测试</a></li>
+                        	<li><a class="J_menuItem" href="${base}/admin/apiTest/driverList.jhtml">上传定位</a></li>
+                        </ul>
+                    </li>							
+                    
                 </ul>
             </div>
         </nav>
@@ -122,19 +230,23 @@
                         </li>
                     </ul>
                 </div>
-                <a href="logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="logout.jhtml" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${base}/admin/welcome" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${base}/admin/welcome.jhtml" frameborder="0" data-id="index_v1.html" seamless></iframe>
             </div>
             <div class="footer">
-                <div class="pull-right">&copy; 2016-2017 Flashike
+                <div class="pull-right">&copy; 2016-2018 亚汽专车
                 </div>
             </div>
         </div>
         <!--右侧部分结束-->
         <!--右侧边栏开始-->
+        <div id="right-sidebar">
+            <div class="sidebar-container">
 
+            </div>
+        </div>
         <!--右侧边栏结束-->
     </div>
 
@@ -143,7 +255,7 @@
     <script src="${base}/resources/admin/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="${base}/resources/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${base}/resources/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="${base}/resources/admin/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/plugins/layer/layer.min.js"></script>
 
     <!-- 自定义js -->
     <script src="${base}/resources/admin/js/hplus.js?v=4.1.0"></script>
