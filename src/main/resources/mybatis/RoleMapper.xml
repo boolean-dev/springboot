@@ -33,7 +33,7 @@
 	<select id="findAuthorities" resultType="java.lang.String" parameterType="java.lang.String">
 		select authorities
 		from tb_role_authority
-		where role = #{id,jdbcType=BIGINT}
+		where role = #{id,jdbcType=VARCHAR}
 	</select>
 
 	<select id="findPage" parameterType="map" resultMap="BaseResultMap">

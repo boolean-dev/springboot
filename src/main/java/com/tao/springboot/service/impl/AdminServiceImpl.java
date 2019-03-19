@@ -92,7 +92,7 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminSer
 
 	@Override
 	public Admin findByUsername(String username) throws Exception {
-		return adminDao.find(username);
+		return adminDao.findByUserName(username);
 	}
 
 	@Override

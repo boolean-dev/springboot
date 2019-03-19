@@ -97,7 +97,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM TB_ADMIN t
-		WHERE t.username = #{username}
+		WHERE t.username = #{userName}
 	</select>
 
 	<insert id="saveRoles">

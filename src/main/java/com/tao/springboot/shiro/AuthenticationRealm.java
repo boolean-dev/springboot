@@ -77,6 +77,8 @@ public class AuthenticationRealm extends AuthorizingRealm {
 	/**
 	 * 获取授权信息
 	 * 用户角色权限和用户权限
+	 *
+	 * 执行认证逻辑
 	 * @param principals
 	 *            principals
 	 * @return 授权信息

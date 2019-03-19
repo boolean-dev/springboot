@@ -26,10 +26,19 @@ public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao {
 		return super.find(mapper, parameters);
 	}
 
-	public Admin find(String id) throws Exception {
+	@Override
+    public Admin find(String id) throws Exception {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("id", id);
 		return super.find("AdminMapper.findById", parameters);
 	}
-	
+
+	@Override
+	public Admin findByUserName(String userName) throws Exception{
+		Map<String, Object> parameters = new HashMap<>(1);
+		parameters.put("userName", userName);
+		return super.find("AdminMapper.findByUserName", parameters);
+	}
+
+
 }
